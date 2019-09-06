@@ -2,6 +2,7 @@ package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.User;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -52,18 +53,16 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     @Test
     public void delete(){
-        Optional<User> user = userRepository.findById(2L);
+        Optional<User> user = userRepository.findById(1L);
+
+        Assert.assertTrue(user.isPresent());
 
         user.ifPresent(selectedUser -> {
             userRepository.delete(selectedUser);
         });
 
-        Optional<User> deleteUer = userRepository.findById(2L);
+        Optional<User> deleteUer = userRepository.findById(1L);
 
-        if(deleteUer.isPresent()){
-            System.out.println("exist :" + deleteUer.get());
-        }else{
-            System.out.println("deleted");
-        }
+        Assert.assertFalse(deleteUer.isPresent()); //false
     }
 }
