@@ -50,7 +50,20 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     }
 
+    @Test
     public void delete(){
+        Optional<User> user = userRepository.findById(2L);
 
+        user.ifPresent(selectedUser -> {
+            userRepository.delete(selectedUser);
+        });
+
+        Optional<User> deleteUer = userRepository.findById(2L);
+
+        if(deleteUer.isPresent()){
+            System.out.println("exist :" + deleteUer.get());
+        }else{
+            System.out.println("deleted");
+        }
     }
 }
