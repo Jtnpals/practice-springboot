@@ -5,6 +5,7 @@ import com.example.study.model.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -38,6 +39,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
+    @Transactional
     public void update(){
         Optional<User> user = userRepository.findById(2L);
 
@@ -52,8 +54,9 @@ public class UserRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
+    @Transactional //데이터베이스 다시 롤백해줘서 데이터베이스에 영향을 주지않음
     public void delete(){
-        Optional<User> user = userRepository.findById(1L);
+        Optional<User> user = userRepository.findById(3L);
 
         Assert.assertTrue(user.isPresent());
 
@@ -61,7 +64,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
             userRepository.delete(selectedUser);
         });
 
-        Optional<User> deleteUer = userRepository.findById(1L);
+        Optional<User> deleteUer = userRepository.findById(3L);
 
         Assert.assertFalse(deleteUer.isPresent()); //false
     }
