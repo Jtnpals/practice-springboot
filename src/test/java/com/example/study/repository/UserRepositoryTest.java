@@ -36,7 +36,17 @@ public class UserRepositoryTest extends StudyApplicationTests {
         });
     }
 
+    @Test
     public void update(){
+        Optional<User> user = userRepository.findById(2L);
+
+        user.ifPresent(selectedUser -> {
+            selectedUser.setAccount("PPPP");
+            selectedUser.setUpdatedAt(LocalDateTime.now());
+            selectedUser.setCreatedBy("update method()");
+
+            userRepository.save(selectedUser);//동일한 아이디가 존재하면 생성이아닌 업데이트를 해줌
+        });
 
     }
 
