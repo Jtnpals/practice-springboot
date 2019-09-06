@@ -2,12 +2,14 @@ package com.example.study.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 //@Table(name = "user") //동일하기 때문에 굳이 선언하지 않아도 됨
 public class User {
