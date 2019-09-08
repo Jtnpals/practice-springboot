@@ -16,7 +16,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     private UserRepository userRepository;
 
     @Test
-    public void create(){
+    public void create() {
         User user = new User();
         user.setAccount("TestUser03");
         user.setEmail("TestUser03@gmail.com");
@@ -29,7 +29,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
-    public void read(){
+    public void read() {
         Optional<User> user = userRepository.findById(2L);
 
         user.ifPresent(selectedUser -> {
@@ -40,7 +40,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     @Test
     @Transactional
-    public void update(){
+    public void update() {
         Optional<User> user = userRepository.findById(2L);
 
         user.ifPresent(selectedUser -> {
@@ -55,7 +55,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     @Test
     @Transactional //데이터베이스 다시 롤백해줘서 데이터베이스에 영향을 주지않음
-    public void delete(){
+    public void delete() {
         Optional<User> user = userRepository.findById(3L);
 
         Assert.assertTrue(user.isPresent());
