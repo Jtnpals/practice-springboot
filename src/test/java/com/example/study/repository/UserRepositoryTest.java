@@ -18,11 +18,11 @@ public class UserRepositoryTest extends StudyApplicationTests {
     @Test
     public void create() {
         User user = new User();
-        user.setAccount("TestUser03");
-        user.setEmail("TestUser03@gmail.com");
-        user.setPhoneNumber("010-3333-3333");
+        user.setAccount("TestUser01");
+        user.setEmail("TestUser01@gmail.com");
+        user.setPhoneNumber("010-1111-1111");
         user.setCreatedAt(LocalDateTime.now());
-        user.setCreatedBy("TestUser3");
+        user.setCreatedBy("TestUser1");
 
         User newUser = userRepository.save(user);
         System.out.println("newUser : " + newUser);
