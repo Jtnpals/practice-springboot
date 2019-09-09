@@ -30,7 +30,7 @@ public class ItemRepositoryTest extends StudyApplicationTests {
 
         Optional<Item> item = itemRepository.findById(id);
         // :: 는 메서드 레퍼런스를 의미 i -> System.out.println(i);
-        item.ifPresent(System.out::println);
+        Assert.assertTrue(item.isPresent());
 
     }
 }
