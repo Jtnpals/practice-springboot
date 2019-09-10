@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {//User 의 repository 이고 기본키가 Long 형
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findFirstByPhoneNumberOrderByIdDesc(String phoneNumber); //하나의 폰으로 여러개 가입가능하니 그중 최근에걸 id의 역순으로 매칭
 }

@@ -20,6 +20,7 @@ public class Item {
     private Long id;
     private String status;
     private String name;
+    private String title;
     private String content;
     private Integer price;
     private String brandName;
@@ -29,7 +30,7 @@ public class Item {
     private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
-
+    private Long partnerId;
     // LAZY = 지연로딩, EAGER = 즉시로
     // LAZY = select * from item where id = ?
     // EAGER = 연관관계가 설정된 모든 테이블끼리 조인이됨 -> 성능저하 (1 : 1 관계나 하나의 데이터만나오는 경우에만 쓸것)
