@@ -4,30 +4,34 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
-//@Table(name = "user") //동일하기 때문에 굳이 선언하지 않아도 됨
-public class User {
+public class OrderGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @Column(name = "account") //동일하기 때문에 굳이 선언 안해도 됨
-    private String account;
-    private String password;
     private String status;
-    private String email;
-    private String phoneNumber; //자동으로 camel case 를 snake case 로 변환해줌 굳이 phone_number 로 안해도됨
+    private String orderType;
+    private String revAddress;
+    private String revName;
+    private String paymentType;
+    private BigDecimal totalPrice;
+    private Integer totalQuantity;
+    private LocalDateTime orderAt;
+    private String orderBy;
     private LocalDateTime registeredAt;
     private LocalDateTime unregisteredAt;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
-
 }
