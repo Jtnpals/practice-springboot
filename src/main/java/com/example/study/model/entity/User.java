@@ -1,6 +1,7 @@
 package com.example.study.model.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -18,6 +19,7 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @ToString(exclude = {"orderGroupList"})
 @Builder
+@Accessors(chain = true)
 //@Table(name = "user") //동일하기 때문에 굳이 선언하지 않아도 됨
 public class User {
     @Id

@@ -1,10 +1,8 @@
 package com.example.study.model.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -20,7 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@ToString(exclude = {"orderDetailList", "partner"})
+@ToString(exclude = {"orderDetailList", "partner"})@Builder
+@Accessors(chain = true)
 public class Item {
 
     @Id
