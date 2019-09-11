@@ -19,24 +19,26 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     @Test
     public void create() {
-        String account = "Test02";
-        String password = "Test02";
+        String account = "Test03";
+        String password = "Test03";
         String status = "REGISTERED";
-        String email = "Test02@gmail.com";
-        String phoneNumber = "010-2222-2222";
+        String email = "Test03@gmail.com";
+        String phoneNumber = "010-3333-3333";
         LocalDateTime registeredAt = LocalDateTime.now();
         LocalDateTime createdAt = LocalDateTime.now();
         String createdBy = "AdminServer";
 
-        User user = new User();
-        user.setAccount(account);
-        user.setPassword(password);
-        user.setStatus(status);
-        user.setEmail(email);
-        user.setPhoneNumber(phoneNumber);
-        user.setRegisteredAt(registeredAt);
+//        User user = new User();
+//        user.setAccount(account);
+//        user.setPassword(password);
+//        user.setStatus(status);
+//        user.setEmail(email);
+//        user.setPhoneNumber(phoneNumber);
+//        user.setRegisteredAt(registeredAt);
 //        user.setCreatedAt(createdAt);
 //        user.setCreatedBy(createdBy);
+
+        User user = User.builder().account(account).password(password).status(status).email(email).phoneNumber(phoneNumber).build();
 
         User newUser = userRepository.save(user);
 
