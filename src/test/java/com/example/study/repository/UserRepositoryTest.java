@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -46,6 +47,28 @@ public class UserRepositoryTest extends StudyApplicationTests {
     @Transactional
     public void read() {
         User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-1111-1111");
+
+        if(user != null) {
+            user.getOrderGroupList().stream().forEach(orderGroup -> {
+
+                System.out.println("---- 주문 묶음 ----");
+                System.out.println(orderGroup.getRevName());
+                System.out.println(orderGroup.getTotalPrice());
+                System.out.println(orderGroup.getRevAddress());
+
+                System.out.println("---- 주문 상세 ----");
+                orderGroup.getOrderDetailList().forEach(orderDetail -> {
+                    System.out.println("주문 상품 : " + orderDetail.getItem().getName());
+                    System.out.println("파트너사 : " + orderDetail.getItem().getPartner().getName());
+                    System.out.println("카테고리 : " + orderDetail.getItem().getPartner().getCategory().getTitle());
+
+                    System.out.println(orderDetail.getStatus());
+                    System.out.println(orderDetail.getArrivalDate());
+
+
+                });
+            });
+        }
         Assert.assertNotNull(user);
     }
 
