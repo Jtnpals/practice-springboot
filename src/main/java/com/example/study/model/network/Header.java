@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Header<T> {
     //api 통신시간
     @JsonProperty("transaction_time") //어노테이션으로 카멜케스로 바꿔줄수도 있음 근데 일일히 하기 귀찮으니 properties에 설정
-    private String transactionTime;
+    private LocalDateTime transactionTime; // ISO, YYYY-MM-DD 등 여러가지 매핑방법이 있지만 그냥 시간으로쓸거임
 
     //api 응답코드
     private String resultCode;
@@ -24,4 +26,16 @@ public class Header<T> {
     private String description;
 
     private T data;
+
+    public static <T> Header<T> OK(){
+        return (Header<T>) Header.builder().transactionTime(LocalDateTime.now()).resultCode("OK").description("OK").build();
+    }
+
+    public static <T> Header<T> OK(T data){
+        return (Header<T>) Header.builder().transactionTime(LocalDateTime.now()).resultCode("OK").description("OK").data(data).build();
+    }
+
+    public static <T> Header<T> ERROR(String description){
+        return (Header<T>) Header.builder().transactionTime(LocalDateTime.now()).resultCode("ERROR").description(description).build();
+    }
 }
