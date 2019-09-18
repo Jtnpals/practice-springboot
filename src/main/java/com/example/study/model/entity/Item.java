@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,7 +19,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@ToString(exclude = {"orderDetailList", "partner"})@Builder
+@ToString(exclude = {"orderDetailList", "partner"})
+@Builder
 @Accessors(chain = true)
 public class Item {
 
@@ -29,7 +31,7 @@ public class Item {
     private String name;
     private String title;
     private String content;
-    private Integer price;
+    private BigDecimal price;
     private String brandName;
     private LocalDateTime registeredAt;
     private LocalDateTime unregisteredAt;
