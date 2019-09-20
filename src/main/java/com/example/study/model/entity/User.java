@@ -1,5 +1,6 @@
 package com.example.study.model.entity;
 
+import com.example.study.model.enumclass.UserStatus;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
@@ -28,7 +29,9 @@ public class User {
 //    @Column(name = "account") //동일하기 때문에 굳이 선언 안해도 됨
     private String account;
     private String password;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status; // REGISTERED / UNREGISTERED / WAITING
     private String email;
     private String phoneNumber; //자동으로 camel case 를 snake case 로 변환해줌 굳이 phone_number 로 안해도됨
     private LocalDateTime registeredAt;
