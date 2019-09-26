@@ -26,4 +26,16 @@ public class RestaurantControllerTest {
                .andExpect(content().string(containsString("\"id\":1004")));
    }
 
+   @Test
+    public void detail() throws Exception {
+        mvc.perform(get("/restaurant/1004"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"name\":\"Bob zip\"")))
+                .andExpect(content().string(containsString("\"id\":1004")));
+
+       mvc.perform(get("/restaurant/2020"))
+               .andExpect(status().isOk())
+               .andExpect(content().string(containsString("\"name\":\"Cyber food\"")))
+               .andExpect(content().string(containsString("\"id\":2020")));
+   }
 }
