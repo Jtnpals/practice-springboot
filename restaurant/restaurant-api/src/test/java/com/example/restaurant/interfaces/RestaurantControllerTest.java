@@ -1,5 +1,8 @@
 package com.example.restaurant.interfaces;
 
+import com.example.restaurant.application.RestaurantService;
+import com.example.restaurant.domin.MenuItemRepository;
+import com.example.restaurant.domin.MenuItemRepositoryImpl;
 import com.example.restaurant.domin.RestaurantRepositoryImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +23,14 @@ public class RestaurantControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @SpyBean(RestaurantService.class)
+    private RestaurantService restaurantService;
+
     @SpyBean(RestaurantRepositoryImpl.class)
     private RestaurantRepositoryImpl restaurantRepository;
+
+    @SpyBean(MenuItemRepositoryImpl.class)
+    private MenuItemRepositoryImpl menuItemRepository;
 
     @Test
     public void list() throws Exception {
@@ -36,7 +45,8 @@ public class RestaurantControllerTest {
         mvc.perform(get("/restaurant/1004"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("\"name\":\"Bob zip\"")))
-                .andExpect(content().string(containsString("\"id\":1004")));
+                .andExpect(content().string(containsString("\"id\":1004")))
+            .andExpect(content().string(containsString("Kimchi")));
 
        mvc.perform(get("/restaurant/2020"))
                .andExpect(status().isOk())
