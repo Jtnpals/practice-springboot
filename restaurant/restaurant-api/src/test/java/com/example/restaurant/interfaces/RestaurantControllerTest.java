@@ -1,6 +1,6 @@
 package com.example.restaurant.interfaces;
 
-import com.example.restaurant.domin.RestaurantRepository;
+import com.example.restaurant.domin.RestaurantRepositoryImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,8 @@ public class RestaurantControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @SpyBean
-    private RestaurantRepository restaurantRepository;
+    @SpyBean(RestaurantRepositoryImpl.class)
+    private RestaurantRepositoryImpl restaurantRepository;
 
     @Test
     public void list() throws Exception {
