@@ -6,6 +6,7 @@ import com.example.restaurant.domin.Restaurant;
 import com.example.restaurant.domin.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,5 +36,14 @@ public class RestaurantService {
 
     public Restaurant addRestaurant(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
+    }
+
+    @Transactional
+    public Restaurant updateRestaurant(long id, String name, String address) {
+
+        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        restaurant.setName(name);
+        restaurant.setAddress(address);
+        return restaurant;
     }
 }
