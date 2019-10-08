@@ -9,7 +9,11 @@ import static org.junit.Assert.*;
 public class RestaurantTest {
     @Test
     public void creation(){
-        Restaurant restaurant = new Restaurant(1004L, "Restaurant", "Seoul");
+        Restaurant restaurant = Restaurant.builder()
+                .id(1004L)
+                .name("Restaurant")
+                .address("Seoul")
+                .build();
 
         assertThat(restaurant.getName(), is("Restaurant"));
         assertThat(restaurant.getAddress(), is("Seoul"));
@@ -18,7 +22,11 @@ public class RestaurantTest {
 
     @Test
     public void information(){
-        Restaurant restaurant = new Restaurant(1004L,"Restaurant", "Seoul");
+        Restaurant restaurant = Restaurant.builder()
+                .id(1004L)
+                .name("Restaurant")
+                .address("Seoul")
+                .build();
 
         assertThat(restaurant.getInformation(), is("Restaurant in Seoul"));
     }
