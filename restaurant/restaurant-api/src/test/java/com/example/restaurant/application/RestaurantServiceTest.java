@@ -59,10 +59,16 @@ public class RestaurantServiceTest {
     }
 
     @Test
-    public void getRestaurants() {
+    public void getRestaurantsWithExisted() {
         List<Restaurant> restaurants = restaurantService.getRestaurants();
         Restaurant restaurant = restaurants.get(0);
         assertThat(restaurant.getId(), is(1004L));
+
+    }
+
+    @Test(expected = RestaurantNotFoundException.class)
+    public void getRestaurantsWithNotExisted() {
+        restaurantService.getRestaurant(404L);
 
     }
 

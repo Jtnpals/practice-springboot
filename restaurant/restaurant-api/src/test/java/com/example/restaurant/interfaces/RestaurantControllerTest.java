@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -44,7 +43,7 @@ public class RestaurantControllerTest {
    }
 
    @Test
-    public void detail() throws Exception {
+    public void detailWithExisted() throws Exception {
        Restaurant restaurant = Restaurant.builder().id(1004L).name("Bob zip").address("Seoul").build();
        restaurant.setMenuItems(Arrays.asList(MenuItem.builder().name("Kimchi").build()));
        Restaurant restaurant2 = Restaurant.builder().id(2020L).name("Cyber food").address("Seoul").build();
@@ -61,6 +60,15 @@ public class RestaurantControllerTest {
                .andExpect(content().string(containsString("\"name\":\"Cyber food\"")))
                .andExpect(content().string(containsString("\"id\":2020")));
    }
+
+    @Test
+    public void detailWithNotExisted() throws Exception {
+        given(restaurantService.getRestaurant(404L))
+                .willThrow(new RestaurantNotFoundException(404L));
+        mvc.perform(get("/restaurants/404"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("{}"));
+    }
 
    @Test
     public void createWithValidData() throws Exception {
