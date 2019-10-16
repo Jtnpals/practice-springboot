@@ -1,11 +1,20 @@
 package com.example.restaurant.application;
 
 import com.example.restaurant.domin.Review;
+import com.example.restaurant.domin.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ReviewService {
-    public void addReview(Review review){
+    private ReviewRepository reviewRepository;
 
+    @Autowired
+    public ReviewService(ReviewRepository reviewRepository){
+        this.reviewRepository = reviewRepository;
+    }
+
+    public Review addReview(Review review){
+        return reviewRepository.save(review);
     }
 }
