@@ -9,20 +9,22 @@ import java.util.List;
 
 @Service
 public class RestaurantService {
-    @Autowired
     private RestaurantRepository restaurantRepository;
-    @Autowired
     private MenuItemRepository menuItemRepository;
-
-    public RestaurantService(RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository) {
+    private ReviewRepository reviewRepository;
+    @Autowired
+    public RestaurantService(RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository, ReviewRepository reviewRepository) {
         this.restaurantRepository =restaurantRepository;
         this.menuItemRepository = menuItemRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     public Restaurant getRestaurant(Long id){
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(()-> new RestaurantNotFoundException(id));
         List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
         restaurant.setMenuItems(menuItems);
+        List<Review> reviews =  reviewRepository.findAllByRestaurantId(id);
+        restaurant.setReviews(reviews);
         return restaurant;
     }
 

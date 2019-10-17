@@ -46,19 +46,19 @@ public class RestaurantControllerTest {
     public void detailWithExisted() throws Exception {
        Restaurant restaurant = Restaurant.builder().id(1004L).name("Bob zip").address("Seoul").build();
        restaurant.setMenuItems(Arrays.asList(MenuItem.builder().name("Kimchi").build()));
-       Restaurant restaurant2 = Restaurant.builder().id(2020L).name("Cyber food").address("Seoul").build();
+       Review review = Review.builder()
+               .name("JOKER")
+               .score(5)
+               .description("Great!")
+               .build();
+       restaurant.setReviews(Arrays.asList(review));
         given(restaurantService.getRestaurant(1004L)).willReturn(restaurant);
-        given(restaurantService.getRestaurant(2020L)).willReturn(restaurant2);
         mvc.perform(get("/restaurants/1004"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("\"name\":\"Bob zip\"")))
                 .andExpect(content().string(containsString("\"id\":1004")))
-            .andExpect(content().string(containsString("Kimchi")));
-
-       mvc.perform(get("/restaurants/2020"))
-               .andExpect(status().isOk())
-               .andExpect(content().string(containsString("\"name\":\"Cyber food\"")))
-               .andExpect(content().string(containsString("\"id\":2020")));
+            .andExpect(content().string(containsString("Kimchi")))
+                    .andExpect(content().string(containsString("Great!")));
    }
 
     @Test

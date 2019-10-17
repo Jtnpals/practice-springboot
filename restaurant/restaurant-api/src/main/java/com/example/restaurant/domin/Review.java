@@ -1,9 +1,6 @@
 package com.example.restaurant.domin;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,4 +23,6 @@ public class Review {
     private int score;
     @NotEmpty
     private String description;
+    @Setter
+    private Long restaurantId;
 }
