@@ -34,4 +34,8 @@ public class MenuItemService {
         menuItem.setRestaurantId(restaurantId);
         menuItemRepository.save(menuItem);
     }
+
+    public List<MenuItem> getMenuItems(long id) {
+        return menuItemRepository.findAllByRestaurantId(id);
+    }
 }
