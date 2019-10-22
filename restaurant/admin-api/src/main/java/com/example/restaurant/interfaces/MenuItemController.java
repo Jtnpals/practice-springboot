@@ -3,10 +3,7 @@ package com.example.restaurant.interfaces;
 import com.example.restaurant.application.MenuItemService;
 import com.example.restaurant.domin.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,5 +18,10 @@ public class MenuItemController {
 
         menuItemService.bulkUpdate(restaurantId, menuItems);
         return "";
+    }
+
+    @GetMapping("/restaurants/{restaurantId}/menuitems")
+    public List<MenuItem> getMenuItems(@PathVariable Long restaurantId){
+        return menuItemService.getMenuItems(restaurantId);
     }
 }
